@@ -29,4 +29,13 @@ export default {
         justifyContent: "center",
         alignItems: "center",
       },
+      task: {
+        height: 100,
+        width: 300,
+        borderRadius: 60,
+        backgroundColor: colors.primary,
+        margin: 30,
+        justifyContent: "center",
+        alignItems: "center",
+      },
 }

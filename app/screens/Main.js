@@ -5,47 +5,50 @@ import defaultStyles from "../config/defaultStyles";
 import AppText from "../components/AppText";
 import { Swipeable, RectButton } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
-import { GetChoreItems } from "../services/DataService";
+// import { GetChoreItems } from "../services/DataService";
 
 const Main = ({ onPress, navigation }) => {
-  const [tasks, setTasks] = useState([]);
+  // const [tasks, setTasks] = useState([]);
+  const [taskVisible1, setTaskVisible1] = useState(true);
+  const [taskVisible2, setTaskVisible2] = useState(true);
+  const [taskVisible3, setTaskVisible3] = useState(true);
 
-  useEffect(() => {
-    const fetchTasks = async () => {
-      const fetchedTasks = await GetChoreItems();
-      const currentDay = new Date().getDay();
-      const days = [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ];
-      const filteredTasks = fetchedTasks.filter(
-        (task) => task.day === days[currentDay]
-      );
-      setTasks(filteredTasks);
-    };
+  // useEffect(() => {
+  //   const fetchTasks = async () => {
+  //     const fetchedTasks = await GetChoreItems();
+  //     const currentDay = new Date().getDay();
+  //     const days = [
+  //       "Sunday",
+  //       "Monday",
+  //       "Tuesday",
+  //       "Wednesday",
+  //       "Thursday",
+  //       "Friday",
+  //       "Saturday",
+  //     ];
+  //     const filteredTasks = fetchedTasks.filter(
+  //       (task) => task.day === days[currentDay]
+  //     );
+  //     setTasks(filteredTasks);
+  //   };
 
-    fetchTasks();
-  }, []);
+  //   fetchTasks();
+  // }, []);
 
-  const renderRightActions = (index) => {
+  const handleTaskCompletion = (taskSetter) => {
+    taskSetter(false);
+  };
+
+  const renderRightActions = (taskSetter) => {
     return (
       <RectButton
         style={styles.swipe}
-        onPress={() => handleTaskCompletion(index)}
+        onPress={() => handleTaskCompletion(taskSetter)}
       >
         <AntDesign name="check" size={50} color="green" />
         <Text style={{ color: "green" }}>Done</Text>
       </RectButton>
     );
-  };
-
-  const handleTaskCompletion = (index) => {
-    setTasks(tasks.filter((_, i) => i !== index));
   };
 
   return (
@@ -67,23 +70,46 @@ const Main = ({ onPress, navigation }) => {
         </TouchableOpacity>
       </View>
 
-      {tasks.map((task, index) => (
+      {taskVisible1 && (
         <Swipeable
-          key={index}
-          renderRightActions={() => renderRightActions(index)}
+          renderRightActions={() => renderRightActions(setTaskVisible1)}
         >
           <TouchableOpacity onPress={onPress}>
-            <View style={styles.task}>
-              <AppText>{task.task}</AppText>
+            <View style={defaultStyles.task}>
+              <AppText>Take out Trash</AppText>
             </View>
           </TouchableOpacity>
         </Swipeable>
-      ))}
+      )}
+
+      {taskVisible2 && (
+        <Swipeable
+          renderRightActions={() => renderRightActions(setTaskVisible2)}
+        >
+          <TouchableOpacity onPress={onPress}>
+            <View style={defaultStyles.task}>
+              <AppText>Clean Room</AppText>
+            </View>
+          </TouchableOpacity>
+        </Swipeable>
+      )}
+
+      {taskVisible3 && (
+        <Swipeable
+          renderRightActions={() => renderRightActions(setTaskVisible3)}
+        >
+          <TouchableOpacity onPress={onPress}>
+            <View style={defaultStyles.task}>
+              <AppText>Wash Dishes</AppText>
+            </View>
+          </TouchableOpacity>
+        </Swipeable>
+      )}
 
       <View style={defaultStyles.streak}>
         <AppText style={defaultStyles.streakText}>12</AppText>
       </View>
-      <AppText style={{color: colors.dark}}>Days in a row</AppText>
+      <AppText style={{ color: colors.dark }}>Days in a row</AppText>
     </View>
   );
 };
@@ -91,15 +117,6 @@ const Main = ({ onPress, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 0,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  task: {
-    height: 100,
-    width: 300,
-    borderRadius: 60,
-    backgroundColor: colors.primary,
-    margin: 30,
     justifyContent: "center",
     alignItems: "center",
   },

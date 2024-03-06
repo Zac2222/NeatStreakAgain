@@ -11,7 +11,7 @@ function checkToken() {
 }
 
 const sendData = async (endpoint, passedInData) => {
-  let result = await fetch(`http://localhost:5226/user/${endpoint}`, {
+  let result = await fetch(`http://localhost:5193/user/${endpoint}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -30,7 +30,7 @@ const sendData = async (endpoint, passedInData) => {
 
 //use an async and await function to help us resolve a promise
 const createAccount = async (createdUser) => {
-  let result = await fetch("http://localhost:5226/user/AddUser", {
+  let result = await fetch("http://localhost:5193/user/AddUser", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -48,10 +48,10 @@ const createAccount = async (createdUser) => {
 };
 
 const Login = async (loginUser) => {
-  let result = await fetch("`http://localhost:5226/user/Login", {
+  let result = await fetch("http://localhost:5193/user/Login", {
     method: "POST",
     headers: {
-      "Content-Type": "application.json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(loginUser),
   });
@@ -62,6 +62,7 @@ const Login = async (loginUser) => {
   }
 
   let data = await result.json();
+  console.log(result);
   console.log(data);
   return data; //need a return for the handleSubmit function to work
 };
@@ -71,7 +72,7 @@ const LoggedInData = () => {
 };
 
 const AddChoreItem = async (choreItem) => {
-  let result = await fetch("http://localhost:5226/chore/AddChoreItem", {
+  let result = await fetch("http://localhost:5193/chore/AddChoreItem", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -89,13 +90,15 @@ const AddChoreItem = async (choreItem) => {
 };
 
 const GetChoreItems = async () => {
-    let result = await fetch("http://localhost:5226/chore/GetChoreItems");
+    let result = await fetch("http://localhost:5193/chore/GetChoreItems");
     let data = await result.json();
+    console.log(result);
+    console.log(data);
     return data;
 }
 
 const UpdateChoreItems = async (choreItems) => {
-    let result = await fetch("http://localhost:5226/chore/UpdateChoreItems", {
+    let result = await fetch("http://localhost:5193/chore/UpdateChoreItems", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -114,7 +117,7 @@ const UpdateChoreItems = async (choreItems) => {
 }
 
 const DeleteChoreItem = async (choreItemToDelete) => {
-  let result = await fetch(`http://localhost:5226/chore/DeleteChoreItem/${choreItemToDelete}`, {
+  let result = await fetch(`http://localhost:5193/chore/DeleteChoreItem/${choreItemToDelete}`, {
       method: "POST",
       headers: {
           "Content-Type": "application/json"
@@ -132,7 +135,7 @@ const DeleteChoreItem = async (choreItemToDelete) => {
 }
 
 const GetItemsByCategory = async (Category) => {
-  let result = await fetch(`http://localhost:5226/chore/GetItemsByCategory/${Category}`, {
+  let result = await fetch(`http://localhost:5193/chore/GetItemsByCategory/${Category}`, {
       method: "GET",
       headers: {
           "Content-Type": "application/json"
@@ -150,7 +153,7 @@ const GetItemsByCategory = async (Category) => {
 }
 
 const GetCompletedChoreItems = async () => {
-  let result = await fetch("http://localhost:5226/chore/GetCompletedChoreItems", {
+  let result = await fetch("http://localhost:5193/chore/GetCompletedChoreItems", {
       method: "GET",
       headers: {
           "Content-Type": "application/json"

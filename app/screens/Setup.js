@@ -56,21 +56,20 @@ const Setup = ({ onPress, navigation }) => {
     setModalVisible(true);
   };
   const handleClose = () => {
-    const choreItem = {
-      day: selectedDay,
-      tasks: inputTexts[selectedDay],
-      category: selectedCategory[selectedDay],
-      time: selectedTimes[selectedDay],
-    };
+    // const choreItem = {
+    //   day: selectedDay,
+    //   tasks: inputTexts[selectedDay],
+    //   category: selectedCategory[selectedDay],
+    //   time: selectedTimes[selectedDay],
+    // };
   
-    AddChoreItem(choreItem)
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  
+    // AddChoreItem(choreItem)
+    //   .then(response => {
+    //     console.log(response.data);
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //   });
     setModalVisible(false);
   };
 
