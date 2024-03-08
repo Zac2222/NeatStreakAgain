@@ -12,6 +12,7 @@ const Main = ({ onPress, navigation }) => {
   const [taskVisible1, setTaskVisible1] = useState(true);
   const [taskVisible2, setTaskVisible2] = useState(true);
   const [taskVisible3, setTaskVisible3] = useState(true);
+  const [streak, setStreak] = useState(0);
 
   // useEffect(() => {
   //   const fetchTasks = async () => {
@@ -37,6 +38,7 @@ const Main = ({ onPress, navigation }) => {
 
   const handleTaskCompletion = (taskSetter) => {
     taskSetter(false);
+    setStreak(streak + 1);
   };
 
   const renderRightActions = (taskSetter) => {
@@ -107,9 +109,9 @@ const Main = ({ onPress, navigation }) => {
       )}
 
       <View style={defaultStyles.streak}>
-        <AppText style={defaultStyles.streakText}>12</AppText>
+        <AppText style={defaultStyles.streakText}>{streak}</AppText>
       </View>
-      <AppText style={{ color: colors.dark }}>Days in a row</AppText>
+      <AppText style={{ color: colors.dark }}>Task Streak</AppText>
     </View>
   );
 };
